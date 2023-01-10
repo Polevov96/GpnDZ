@@ -25,6 +25,7 @@ export default {
   justify-content: center;
   padding: 20px;
   margin: 0px;
+  background-image: url('@/assets/fon.png');
 }
 * {
   margin: 0;
