@@ -15,11 +15,19 @@
         class="BtnSave"
         :label="'Сохранить'"
       />
-      <BtnInFormVue class="BtnCancel" :label="'Отменить'" />
+      <BtnInFormVue
+        @click="handleTaskClick"
+        class="BtnCancel"
+        :label="'Отменить'"
+      />
     </div>
     <div v-else class="BtnSerhEditForm">
       <BtnInFormVue @click="addTextTask" :label="'Добавить'" />
-      <BtnInFormVue class="BtnClean" :label="'Отчистить'" />
+      <BtnInFormVue
+        @click="resetTaskText"
+        class="BtnClean"
+        :label="'Отчистить'"
+      />
       <!-- :onCleanInput="onCleanInput" -->
     </div>
   </div>
@@ -66,11 +74,8 @@ export default {
         text: this.newTaskText,
         status: 0,
         isActive: false,
-        // isEdit: false,
       });
-      this.newTaskText = "";
-      // this.$store.dispatch("setEdit");
-
+      this.resetTaskText();
     },
     updateTaskItem: function () {
       const updateTask = {
@@ -78,6 +83,14 @@ export default {
         text: this.newTaskText,
       };
       this.$store.dispatch("updateTask", updateTask);
+      this.resetTaskText();
+    },
+    handleTaskClick: function () {
+      this.$store.dispatch("deactivateTask");
+      this.resetTaskText();
+    },
+    resetTaskText: function () {
+      this.newTaskText = "";
     },
   },
   computed: {

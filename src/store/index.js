@@ -20,24 +20,16 @@ export const store = new Vuex.Store({
       state.taskList = payload;
     },
     SET_EDIT: (state, payload) => {
-      if (!state.isEdit) {
-        state.isEdit = !state.isEdit;
-      } else {
-        state.taskList.map((task) => {
-          if (task.id === payload) {
-            state.editTaskId = null;
-            state.isEdit = !state.isEdit;
-          }
-        });
-      }
+      state.isEdit = payload;
     },
 
     SET_EDITTASKID: (state, payload) => {
-      state.taskList.map((task) => {
-        if (task.id === payload) {
-          state.editTaskId = payload;
-        }
-      });
+      state.editTaskId = payload;
+      // state.taskList.map((task) => {
+      //   if (task.id === payload) {
+      //     state.editTaskId = payload;
+      //   }
+      // });
     },
 
     CHANGE_STATUS: (state, payload) => {
@@ -111,19 +103,13 @@ export const store = new Vuex.Store({
     //   }
     //   context.commit("SET_EDIT");
     // },
-    activetTask: function (context, payload) {
-      if (context.isEdit) {
-        context.commit("SET_EDITTASKID", null);
-      } else {
-        context.commit("SET_EDITTASKID", payload);
-      }
-      context.commit("SET_EDIT");
+    activateTask: function (context, payload) {
+      context.commit("SET_EDIT", true);
+      context.commit("SET_EDITTASKID", payload);
     },
-    deactivetTask: function (context, payload) {
-      // console.log("deactive", context);
-      // context.commit("SET_EDITTASKID", null);
-      // context.commit("SET_EDIT");
-      context.commit("SET_EDIT", payload);
+    deactivateTask: function (context) {
+      context.commit("SET_EDIT", false);
+      context.commit("SET_EDITTASKID", null);
     },
     addTask: function (context, payload) {
       context.commit("ADD_TASK", payload);

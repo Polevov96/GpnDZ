@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="[{ 'taskItem_active' : isEdit }, 'taskItem']">
+  <div v-bind:class="[{ taskItem_active: isCurrentTaskEdit }, 'taskItem']">
     <!-- Как-то передать статус и обработчик -->
     <StatucBtnVue @click="handleStatusClick" :isActive="task.isActive" />
     <div :class="task.isActive ? 'task__text_active' : ''">
@@ -42,19 +42,22 @@ export default {
       this.$store.dispatch("deleteTask", this.task.id);
     },
     handleTaskClick: function () {
-      // this.$store.dispatch("taskClick", this.task.id);
-      if (!this.isEdit) {
-        this.$store.dispatch("activetTask", this.task.id);
-      } else {
-        this.$store.dispatch("deactivetTask", this.task.id);
+      if (
+        this.$store.state.editTaskId === this.task.id &&
+        this.$store.state.isEdit
+      ) {
+        this.$store.dispatch("deactivateTask");
+        return;
       }
+
+      this.$store.dispatch("activateTask", this.task.id);
     },
   },
   computed: {
     getTaskList() {
       return this.$store.state.taskList;
     },
-    isEdit() {
+    isCurrentTaskEdit() {
       return this.$store.state.editTaskId === this.task.id;
     },
   },
