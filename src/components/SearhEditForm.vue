@@ -66,7 +66,7 @@ export default {
         text: this.newTaskText,
         status: 0,
         isActive: false,
-        isEdit: false,
+        // isEdit: false,
       });
       this.newTaskText = "";
       // this.$store.dispatch("setEdit");

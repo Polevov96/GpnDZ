@@ -1,9 +1,5 @@
 <template>
-  <div
-    :id="task.id"
-    :key="task.id"
-    :class="['taskItem', isEdit == true ? 'taskItem_active' : '']"
-  >
+  <div v-bind:class="[{ 'taskItem_active' : isEdit }, 'taskItem']">
     <!-- Как-то передать статус и обработчик -->
     <StatucBtnVue @click="handleStatusClick" :isActive="task.isActive" />
     <div :class="task.isActive ? 'task__text_active' : ''">
@@ -47,10 +43,10 @@ export default {
     },
     handleTaskClick: function () {
       // this.$store.dispatch("taskClick", this.task.id);
-      if (!this.task.isEdit) {
+      if (!this.isEdit) {
         this.$store.dispatch("activetTask", this.task.id);
       } else {
-        this.$store.dispatch("deactivetTask");
+        this.$store.dispatch("deactivetTask", this.task.id);
       }
     },
   },
@@ -67,6 +63,12 @@ export default {
 
 <style scoped>
 .taskItem {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.taskItem2 {
   flex-direction: row;
   display: flex;
   justify-content: space-between;
