@@ -71,38 +71,46 @@ export const store = new Vuex.Store({
         return task;
       });
     },
+    ADD_TASK: (state, payload) => {
+      state.taskList.push(payload);
+    },
+    FILTER_ALL: (state) => {
+      
+      state.taskList = state.taskList.filter((item) => {
+        return item;
+      });
+    },
+    FILTER_WAITING: (state) => {
+      state.taskList = state.taskList.filter((item) => {
+        if (!item.isActive) {
+          return item;
+        }
+      });
+    },
+    FILTER_DONE: (state) => {
+      state.taskList = state.taskList.filter((item) => {
+        if (item.isActive) {
+          return item;
+        }
+      });
+    },
   },
 
   actions: {
     // payload = {id: 2, text: "tetst", status: sdsf} = task
     updateTask: async (context, payload) => {
-      // payload =  {text: "jhjfsfd"}
-      // payload =  {status: "jhjfsfd"}
-      // TODO: найти таску по id
-      // TODO: обновить статус на противоположный
       context.commit("UP_DATE_TASK", payload);
       context.commit("SET_EDIT");
       context.commit("SET_EDITTASKID", null);
     },
 
     changeStatus: async (context, payload) => {
-      // TODO: найти таску по id
-      // TODO: обновить статус на противоположный
       context.commit("CHANGE_STATUS", payload);
     },
     deleteTask: (context, payload) => {
-      // TODO: найти таску по id
-      // TODO: удалить эту таску из стора
       context.commit("DELETE_TASK", payload);
     },
-    // taskClick: (context, payload) => {
-    //   if (context.isEdit) {
-    //     context.commit("SET_EDITTASKID", null);
-    //   } else {
-    //     context.commit("SET_EDITTASKID", payload);
-    //   }
-    //   context.commit("SET_EDIT");
-    // },
+
     activateTask: function (context, payload) {
       context.commit("SET_EDIT", true);
       context.commit("SET_EDITTASKID", payload);
@@ -112,7 +120,21 @@ export const store = new Vuex.Store({
       context.commit("SET_EDITTASKID", null);
     },
     addTask: function (context, payload) {
-      context.commit("ADD_TASK", payload);
+      context.commit("ADD_TASK", {
+        id: Math.round(Math.random() * 1000000),
+        text: payload,
+        status: 0,
+        isActive: false,
+      });
+    },
+    filterAll: function (context) {
+      context.commit("FILTER_ALL");
+    },
+    filterInWaiting: function (context) {
+      context.commit("FILTER_WAITING");
+    },
+    filterDone: function (context) {
+      context.commit("FILTER_DONE");
     },
   },
   modules: {},

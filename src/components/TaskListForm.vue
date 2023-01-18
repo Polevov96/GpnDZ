@@ -1,9 +1,9 @@
 <template>
   <div class="taskListForm">
     <div class="BtnTaskListForm">
-      <BtnInFormVue label="Все" />
-      <BtnInFormVue label="В Ожидании" />
-      <BtnInFormVue label="Выполнено" />
+      <BtnInFormVue @click="ClickFilterAll" label="Все" />
+      <BtnInFormVue @click="ClickFilterInWaiting" label="В Ожидании" />
+      <BtnInFormVue @click="ClickFilterDone" label="Выполнено" />
     </div>
     <div>
       <TaskItemVue v-for="task in getTaskList" :key="task.id" :task="task" />
@@ -21,15 +21,18 @@ export default {
     BtnInFormVue,
     TaskItemVue,
   },
-  //     data() { return { taskList: [{id: 1, text: "test", status: 0, isActive: false}]
-  // } },
-  //   methods:  {
-  //      chengDoneStatus: function (value) {
-  //      let idx = this.taskList.findIndex(el => el.id === value)
-  //      this.taskList[idx].isActive = !this.taskList[idx].isActive;
-  //     }
-  //    },
-  // },
+
+  methods: {
+    ClickFilterAll: function () {
+      this.$store.dispatch("filterAll", this.$store.state.taskList);
+    },
+    ClickFilterInWaiting: function () {
+      this.$store.dispatch("filterInWaiting", this.$store.state.taskList);
+    },
+    ClickFilterDone: function () {
+      this.$store.dispatch("filterDone", this.$store.state.taskList);
+    },
+  },
   computed: {
     getTaskList() {
       return this.$store.state.taskList;
@@ -47,6 +50,4 @@ export default {
   flex-direction: row;
   display: inline-flex;
 }
-
-
 </style>

@@ -23,6 +23,7 @@ export default {
     BtnInFormVue,
     StatucBtnVue,
   },
+  
   props: {
     /**
      * @return Object  {id: 1, text: "test", status: 0}
@@ -34,11 +35,9 @@ export default {
   },
   methods: {
     handleStatusClick: function () {
-      // TODO: взять task.id локально и передать в метод обновления задачи из стора
-      this.$store.dispatch("changeStatus", this.task.id);
+       this.$store.dispatch("changeStatus", this.task.id);
     },
     handleTaskDelete: function () {
-      // TODO: взять task.id локально и передать в метод удаления задачи из стора
       this.$store.dispatch("deleteTask", this.task.id);
     },
     handleTaskClick: function () {
@@ -46,11 +45,15 @@ export default {
         this.$store.state.editTaskId === this.task.id &&
         this.$store.state.isEdit
       ) {
+        this.resetTaskText();
         this.$store.dispatch("deactivateTask");
         return;
       }
 
       this.$store.dispatch("activateTask", this.task.id);
+    },
+    resetTaskText: function () {
+      this.newTaskText = "";
     },
   },
   computed: {

@@ -3,7 +3,7 @@
   <div class="searhEditForm">
     <div class="imputText">
       <input
-        v-model="newTaskText"
+        v-model.trim="$v.newTaskText.$model"
         class="imputText_add"
         type="text"
         placeholder="Новая задача"
@@ -28,32 +28,34 @@
         class="BtnClean"
         :label="'Отчистить'"
       />
-      <!-- :onCleanInput="onCleanInput" -->
     </div>
   </div>
 </template>
 
 <script>
+import { required, minLength } from "vuelidate/lib/validators";
 import BtnInFormVue from "./BtnInForm.vue";
-// import ImputTextVue from "./ImputText.vue";
 
 export default {
   name: "SearhEditForm",
 
   components: {
-    // ImputTextVue,
     BtnInFormVue,
   },
-  // props: ["text"],
 
   data: () => {
     return {
-      // inputValue: null,
       newTaskText: "",
       nextTodoId: 1,
       status: 0,
       isActive: false,
     };
+  },
+  validations: {
+    newTaskText: {
+      required,
+      minLength: minLength(3),
+    },
   },
   watch: {
     isEdit: function (value) {
@@ -63,18 +65,30 @@ export default {
         );
 
         this.newTaskText = activeTask.text;
+      } else {
+        this.resetTaskText();
       }
     },
   },
 
   methods: {
+    // addTextTask: function () {
+    //   if (this.$v.$error) {
+    //     return;
+    //   }
+    //   this.$store.state.taskList.push({
+    //     id: this.nextTodoId++,
+    //     text: this.newTaskText,
+    //     status: 0,
+    //     isActive: false,
+    //   });
+    //   this.resetTaskText();
+    // },
     addTextTask: function () {
-      this.$store.state.taskList.push({
-        id: this.nextTodoId++,
-        text: this.newTaskText,
-        status: 0,
-        isActive: false,
-      });
+      if (this.$v.$error) {
+        return;
+      }
+      this.$store.dispatch("addTask", this.newTaskText);
       this.resetTaskText();
     },
     updateTaskItem: function () {
@@ -82,12 +96,12 @@ export default {
         id: this.$store.state.editTaskId,
         text: this.newTaskText,
       };
-      this.$store.dispatch("updateTask", updateTask);
       this.resetTaskText();
+      this.$store.dispatch("updateTask", updateTask);
     },
     handleTaskClick: function () {
-      this.$store.dispatch("deactivateTask");
       this.resetTaskText();
+      this.$store.dispatch("deactivateTask");
     },
     resetTaskText: function () {
       this.newTaskText = "";
