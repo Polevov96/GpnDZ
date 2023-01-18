@@ -24,13 +24,13 @@ export default {
 
   methods: {
     ClickFilterAll: function () {
-      this.$store.dispatch("filterAll", this.$store.state.taskList);
+      this.$store.dispatch("filterAll");
     },
     ClickFilterInWaiting: function () {
-      this.$store.dispatch("filterInWaiting", this.$store.state.taskList);
+      this.$store.dispatch("filterInWaiting");
     },
     ClickFilterDone: function () {
-      this.$store.dispatch("filterDone", this.$store.state.taskList);
+      this.$store.dispatch("filterDone");
     },
   },
   computed: {

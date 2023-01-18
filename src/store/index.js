@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
     // taskList: [{id: '', text: "", status: 0, isActive: false,  isEdit: false}],
     isEdit: false,
     editTaskId: null,
+    taskNewList: [],
   },
   getters: {
     TASK: (state) => {
@@ -75,7 +76,6 @@ export const store = new Vuex.Store({
       state.taskList.push(payload);
     },
     FILTER_ALL: (state) => {
-      
       state.taskList = state.taskList.filter((item) => {
         return item;
       });
