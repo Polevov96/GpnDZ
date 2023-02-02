@@ -5,6 +5,7 @@ import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 
 const routes = [
+  // FIXME: Удалить или сделать просто лендингом с рекламой продукта
   {
     path: "/",
     name: "home",

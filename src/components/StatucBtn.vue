@@ -18,6 +18,7 @@ export default {
 </script>
 
 <style scoped>
+/* README: слассы стилей лучше использовать вида root-element__inner-element_modificator, подробнее можно почитать в методологии БЭМ */
 .statucBtn {
   background-color: rgb(60, 55, 55);
   border-radius: 10px;
