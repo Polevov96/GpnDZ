@@ -16,6 +16,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    useAuth: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
