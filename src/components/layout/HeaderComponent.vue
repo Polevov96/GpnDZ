@@ -1,0 +1,35 @@
+<template>
+  <div class="nav">
+    <nav>
+      <router-link to="/">Login</router-link> |
+      <router-link to="/tasklist">About</router-link>
+    </nav>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "HeaderComponent",
+};
+</script>
+
+<style scoped>
+.nav {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+
+nav {
+  top: 0px;
+}
+
+nav a {
+  font-weight: bold;
+  /* color: #2c3e50; */
+  color: #42b983;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>

@@ -2,7 +2,10 @@
   <div class="taskListForm">
     <div class="BtnTaskListForm">
       <BtnInFormVue @click="setFilter(filtersValue.ALL)" label="Все" />
-      <BtnInFormVue @click="setFilter(filtersValue.IN_PROGRESS)" label="В Ожидании" />
+      <BtnInFormVue
+        @click="setFilter(filtersValue.IN_PROGRESS)"
+        label="В Ожидании"
+      />
       <BtnInFormVue @click="setFilter(filtersValue.DONE)" label="Выполнено" />
     </div>
     <div>
@@ -39,9 +42,9 @@ export default {
     // },
 
     // NEW_VARIANT: чуть сократил кода, 3 метода теперь можно в один запихнуть )
-    setFilter(value){
-      this.$store.dispatch("setTaskFilter", value)
-    }
+    setFilter(value) {
+      this.$store.dispatch("setTaskFilter", value);
+    },
   },
   computed: {
     getTaskList() {
@@ -49,12 +52,12 @@ export default {
       // return this.$store.state.taskList;
 
       // NEW_VARIANT: просто используем модифицированный мной, но созданный тобой getter из стора
-      return this.$store.getters.tasklistWithFilters
+      return this.$store.getters.tasklistWithFilters;
     },
 
     filtersValue() {
       return taskFiltersConstants;
-    }
+    },
   },
 };
 </script>

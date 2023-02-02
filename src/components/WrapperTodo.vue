@@ -26,5 +26,6 @@ export default {
   background-color: white;
   overflow: auto;
   border-radius: 6px;
+  margin: 1px;
 }
 </style>

@@ -1,41 +1,38 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { taskFiltersConstants } from "../utils/constants"
+import { taskFiltersConstants } from "../utils/constants";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
+    user: null,
     taskList: [],
     // taskList: [{id: '', text: "", status: 0, isActive: false,  isEdit: false}],
     isEdit: false,
     editTaskId: null,
-    taskNewList: [],
-    
+
     // NEW_VARIANT: добавил флаг фильтра, теперь по нему можно смотреть какая кнопка нажата и подкрашивать ее как активную
-    filter: taskFiltersConstants.ALL  // одно из ["all", "inProgress", "done"]
+    filter: taskFiltersConstants.ALL, // одно из ["all", "inProgress", "done"]
   },
   getters: {
     // OLD_VARIANT: так было непонятно, таска одна в названии, а отправляешь список
     // TASK: (state) => {
+    // OLD_VARIANT:  так было
+    // return state.taskList
 
     // NEW_VARIANT: так понятнее, в верхнем регистре нужно писать только мутации, остальное не нужно! негласное правило
     tasklistWithFilters: (state) => {
-      // OLD_VARIANT:  так было
-      // return state.taskList
-
       // NEW_VARIANT:  так стало
-      if(state.filter === taskFiltersConstants.IN_PROGRESS){
-        return state.taskList
-          .filter(item => !item.isActive)
+      if (state.filter === taskFiltersConstants.IN_PROGRESS) {
+        return state.taskList.filter((item) => !item.isActive);
       }
 
-      if(state.filter === taskFiltersConstants.DONE){
-        return state.taskList
-          .filter(item => item.isActive)
+      if (state.filter === taskFiltersConstants.DONE) {
+        return state.taskList.filter((item) => item.isActive);
       }
 
-      return state.taskList
+      return state.taskList;
     },
   },
   mutations: {
@@ -117,11 +114,11 @@ export const store = new Vuex.Store({
     //     }
     //   });
     // },
-    
-    // NEW_VARIANT: теперь фильтр работает так ) 
+
+    // NEW_VARIANT: теперь фильтр работает так )
     SET_TASK_FILTER: (state, value) => {
-      state.filter = value
-    }
+      state.filter = value;
+    },
   },
 
   actions: {
@@ -172,8 +169,8 @@ export const store = new Vuex.Store({
 
     // NEW_VARIANT: заменили на это
     setTaskFilter: function (context, payload) {
-      context.commit("SET_TASK_FILTER", payload)
-    }
+      context.commit("SET_TASK_FILTER", payload);
+    },
   },
   modules: {},
 });
