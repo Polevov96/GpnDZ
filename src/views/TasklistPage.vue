@@ -1,6 +1,7 @@
 <template>
   <PageLayout :useHeader="true">
     <template v-slot:content>
+      <!-- FIXME: где сам класс? почему не в разделе стилей? -->
       <div class="tasklistPage">
         <WrapperTodo />
       </div>

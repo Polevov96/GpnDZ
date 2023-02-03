@@ -16,6 +16,7 @@ export default {
       type: Boolean,
       default: true,
     },
+    // FIXME: Есть пропс, а логики нету... Нужно исправить
     useAuth: {
       type: Boolean,
       default: true,
