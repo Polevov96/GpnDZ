@@ -15,6 +15,12 @@ export default {
 
 <style scoped>
 .nav {
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  margin: 0px;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 5px;
   padding-bottom: 5px;
 }

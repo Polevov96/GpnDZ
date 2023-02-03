@@ -1,4 +1,3 @@
-<!-- /*Поиск и редактирование формы Vue*/ -->
 <template>
   <div class="searhEditForm">
     <div class="imputText">
@@ -10,29 +9,16 @@
       />
     </div>
     <div v-if="isEdit" class="BtnSerhEditForm">
-      <!-- FIXME: строковые пропсы пишутся без ":", исправить label   -->
-      <!-- :label="'Сохранить'" должен быть таким label="Сохранить" -->
-      <BtnInFormVue
-        @click="updateTaskItem"
-        class="BtnSave"
-        :label="'Сохранить'"
-      />
-      <!-- FIXME: строковые пропсы пишутся без ":", исправить label   -->
+      <BtnInFormVue @click="updateTaskItem" class="BtnSave" label="Сохранить" />
       <BtnInFormVue
         @click="handleTaskClick"
         class="BtnCancel"
-        :label="'Отменить'"
+        label="'Отменить'"
       />
     </div>
     <div v-else class="BtnSerhEditForm">
-      <!-- FIXME: строковые пропсы пишутся без ":", исправить label   -->
-      <BtnInFormVue @click="addTextTask" :label="'Добавить'" />
-      <!-- FIXME: строковые пропсы пишутся без ":", исправить label   -->
-      <BtnInFormVue
-        @click="resetTaskText"
-        class="BtnClean"
-        :label="'Отчистить'"
-      />
+      <BtnInFormVue @click="addTextTask" label="Добавить" />
+      <BtnInFormVue @click="resetTaskText" class="BtnClean" label="Отчистить" />
     </div>
   </div>
 </template>

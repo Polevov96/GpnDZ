@@ -39,6 +39,9 @@ export const store = new Vuex.Store({
     SET_TASK: (state, payload) => {
       state.taskList = payload;
     },
+    ADD_USER: (state, payload) => {
+      state.user = payload;
+    },
 
     SET_EDIT: (state, payload) => {
       state.isEdit = payload;
@@ -154,6 +157,9 @@ export const store = new Vuex.Store({
         status: 0,
         isActive: false,
       });
+    },
+    addUser: function (context, payload) {
+      context.commit("ADD_USER", payload);
     },
 
     // OLD_VARIANT: заменяем на один

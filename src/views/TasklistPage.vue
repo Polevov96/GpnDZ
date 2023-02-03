@@ -21,4 +21,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.tasklistPage {
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  margin: 0px;
+  flex-direction: column;
+  align-items: center;
+}
+</style>

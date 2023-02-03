@@ -22,6 +22,7 @@
 
 <script>
 import PageLayout from "@/components/layout/PageLayout.vue";
+import axios from "axios";
 
 export default {
   name: "LoginPage",
@@ -45,8 +46,22 @@ export default {
         return;
       }
       //TODO: 1) отправить запрос на сервер
-      //TODO: 2) Записать ответ сервера записать в store
-      this.$router.push("/tasklist");
+      axios
+        .get("https://jsonplaceholder.typicode.com/users")
+        .then((res) => {
+          const result = res.data.find((user) => {
+            return this.username === user.username;
+          });
+          console.log(result);
+          if (result) {
+            this.$store.dispatch("addUser", result);
+            // Если true
+            //TODO: 2) Записать ответ сервера записать в store
+            this.$router.push("/tasklist");
+          }
+          // Если false - вывести ошибку
+        })
+        .catch((err) => console.log(err));
     },
   },
 };

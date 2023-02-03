@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- FIXME: Эта страница не нужна, или удалить или сделать из нее лендинг с описанием проекта -->
-    <t>Добрый день!</t>
+    <span>Добрый день!</span>
     <button @click="login" type="submit">Авторизация</button>
   </div>
 </template>
