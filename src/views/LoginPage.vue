@@ -55,7 +55,7 @@ export default {
           console.log(result);
           if (result) {
             this.$store.dispatch("addUser", result);
-            // Если true
+            // Если true 6
             //TODO: 2) Записать ответ сервера записать в store
             this.$router.push("/tasklist");
           }

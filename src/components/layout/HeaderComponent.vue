@@ -1,8 +1,8 @@
 <template>
   <div class="nav">
     <nav>
-      <router-link to="/">Login</router-link> |
-      <router-link to="/tasklist">About</router-link>
+      <router-link to="/auth/login">Login</router-link> |
+      <router-link to="/">About</router-link>
     </nav>
   </div>
 </template>
