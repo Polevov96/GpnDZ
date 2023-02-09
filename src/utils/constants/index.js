@@ -5,3 +5,10 @@ export const taskFiltersConstants = {
 	"IN_PROGRESS": "inProgress",
 	"DONE": "done",
 }
+
+export const apiConstants = {
+	BASE_API_URL: "https://jsonplaceholder.typicode.com",
+	TODOS_API_URL: "/todos",
+	AUTH_LOGIN_API_URL: "/auth/login",
+	AUTH_LOGOUT_API_URL: "/auth/logout",
+}
