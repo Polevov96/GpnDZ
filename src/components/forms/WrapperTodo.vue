@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import SearhEditFormVue from "./SearhEditForm.vue"; //Форма ввода задач Vue
-import TaskListFormVue from "./TaskListForm.vue"; //Форма списка задач Vue
+import SearhEditFormVue from "../ui/SearhEditForm.vue";
+import TaskListFormVue from "../ui//TaskListForm.vue"; //Форма списка задач Vue
 
 export default {
   name: "WrapperTodo",

@@ -1,27 +1,24 @@
 <template>
-  <div v-bind:class="[{ taskItem_active: isCurrentTaskEdit }, 'taskItem']">
-    <!-- Как-то передать статус и обработчик -->
-    <StatucBtnVue @click="handleStatusClick" :isActive="task.isActive" />
+  <div v-bind:class="[{ 'task-item_active': isCurrentTaskEdit }, 'task-item']">
+    <StatusBtnVue @click="handleStatusClick" :isActive="task.isActive" />
     <div :class="task.isActive ? 'task__text_active' : ''">
       <div @click="handleTaskClick" class="taskItemText">
         <span>{{ task.text }}</span>
       </div>
     </div>
-    <!-- Как-то передать обработчик -->
-    <BtnInFormVue @click="handleTaskDelete" class="BtnDelete" label="Удалить" />
+    <BtnInFormVue @click="handleTaskDelete" class="Delete_button" label="Удалить" />
   </div>
 </template>
 
 <script>
 import BtnInFormVue from "./BtnInForm.vue";
-import StatucBtnVue from "./StatucBtn.vue";
-
+import StatusBtnVue from "./StatusBtn.vue";
 export default {
   name: "TaskItem",
 
   components: {
     BtnInFormVue,
-    StatucBtnVue,
+    StatusBtnVue,
   },
   
   props: {
@@ -68,22 +65,17 @@ export default {
 </script>
 
 <style scoped>
-.taskItem {
+.task-item {
   flex-direction: row;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.taskItem2 {
-  flex-direction: row;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.taskItem_active {
+
+.task-item_active {
   background-color: rgba(255, 140, 5, 0.7);
 }
-.BtnDelete {
+.Delete_button {
   opacity: 0.3;
 }
 .task__text_active {

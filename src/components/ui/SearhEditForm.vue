@@ -1,14 +1,14 @@
 <template>
-  <div class="searhEditForm">
-    <div class="imputText">
+  <div class="search-Edit-Form">
+    <div class="text_input">
       <input
         v-model.trim="$v.newTaskText.$model"
-        class="imputText_add"
+        class="add-text_input"
         type="text"
         placeholder="Новая задача"
       />
     </div>
-    <div v-if="isEdit" class="BtnSerhEditForm">
+    <div v-if="isEdit" class="search-edit-form_btn">
       <BtnInFormVue @click="updateTaskItem" class="BtnSave" label="Сохранить" />
       <BtnInFormVue
         @click="handleTaskClick"
@@ -16,7 +16,7 @@
         label="'Отменить'"
       />
     </div>
-    <div v-else class="BtnSerhEditForm">
+    <div v-else class="search-edit-form_btn">
       <BtnInFormVue @click="addTextTask" label="Добавить" />
       <BtnInFormVue @click="resetTaskText" class="BtnClean" label="Отчистить" />
     </div>
@@ -63,18 +63,6 @@ export default {
   },
 
   methods: {
-    // addTextTask: function () {
-    //   if (this.$v.$error) {
-    //     return;
-    //   }
-    //   this.$store.state.taskList.push({
-    //     id: this.nextTodoId++,
-    //     text: this.newTaskText,
-    //     status: 0,
-    //     isActive: false,
-    //   });
-    //   this.resetTaskText();
-    // },
     addTextTask: function () {
       if (this.$v.$error) {
         return;
@@ -110,15 +98,15 @@ export default {
 </script>
 
 <style scoped>
-.searhEditForm {
+.search-Edit-Form {
   margin-bottom: 5px;
 }
-.BtnSerhEditForm {
+.search-edit-form_btn {
   flex-direction: row;
   display: flex;
   justify-content: flex-end;
 }
-.imputText {
+.text_input {
   width: 98%;
   height: 35px;
   align-items: center;
@@ -128,7 +116,7 @@ export default {
   text-align: left;
   margin-bottom: 3px;
 }
-.imputText_add {
+.add-text_input {
   border-color: white;
   width: 99.4%;
   height: 91%;

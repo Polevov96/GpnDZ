@@ -1,6 +1,6 @@
 <template>
-  <div class="taskListForm">
-    <div class="BtnTaskListForm">
+  <div class="task_list-form">
+    <div class="task_list-form_btn">
       <BtnInFormVue @click="setFilter(filtersValue.ALL)" label="Все" />
       <BtnInFormVue
         @click="setFilter(filtersValue.IN_PROGRESS)"
@@ -20,7 +20,7 @@ import BtnInFormVue from "./BtnInForm.vue";
 
 // NEW_VARIANT: добавил константы выполнения задач
 // eslint-disable-next-line
-import { taskFiltersConstants } from "../utils/constants";
+import { taskFiltersConstants } from "@/utils/constants";
 
 export default {
   name: "TaskListForm",
@@ -30,28 +30,13 @@ export default {
   },
 
   methods: {
-    // OLD_VARIANT: фильтр должен быть один и зачем с большой буквы написал название методов???
-    // ClickFilterAll: function () {
-    //   this.$store.dispatch("filterAll");
-    // },
-    // ClickFilterInWaiting: function () {
-    //   this.$store.dispatch("filterInWaiting");
-    // },
-    // ClickFilterDone: function () {
-    //   this.$store.dispatch("filterDone");
-    // },
-
-    // NEW_VARIANT: чуть сократил кода, 3 метода теперь можно в один запихнуть )
     setFilter(value) {
       this.$store.dispatch("setTaskFilter", value);
     },
   },
   computed: {
     getTaskList() {
-      // OLD_VARIANT: у тебя же есть getter в сторе, зачем лезть напрямую?!?!?
-      // return this.$store.state.taskList;
 
-      // NEW_VARIANT: просто используем модифицированный мной, но созданный тобой getter из стора
       return this.$store.getters.tasklistWithFilters;
     },
 
@@ -63,11 +48,11 @@ export default {
 </script>
 
 <style scoped>
-.taskListForm {
+.task_list-form {
   margin-bottom: 15px;
 }
 
-.BtnTaskListForm {
+.task_list-form_btn {
   flex-direction: row;
   display: inline-flex;
 }

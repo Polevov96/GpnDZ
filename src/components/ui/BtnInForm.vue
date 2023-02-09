@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('click')" class="btnInForm">{{ label }} &nbsp;</button>
+  <button @click="$emit('click')" class="form-in_button">{{ label }} &nbsp;</button>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style scoped>
-.btnInForm {
+.form-in_button{
   margin-bottom: 3px;
   background: none;
   border: none;

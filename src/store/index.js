@@ -71,12 +71,6 @@ export const store = new Vuex.Store({
       state.taskList = state.taskList.filter((item) => {
         return item.id !== payload;
       });
-
-      // state.taskList.map((task) => {
-      //   if (task.id === payload) {
-      //     state.taskList.slice(payload, 1);
-      //   }
-      // });
     },
 
     UP_DATE_TASK: (state, payload) => {
@@ -97,35 +91,13 @@ export const store = new Vuex.Store({
       state.taskList.push(payload);
     },
 
-    // OLD_VARIANT: теперь их можно заменить одним
-    // FILTER_ALL: (state) => {
-    //   state.taskList = state.taskList.filter((item) => {
-    //     return item;
-    //   });
-    // },
-    // FILTER_WAITING: (state) => {
-    //   state.taskList = state.taskList.filter((item) => {
-    //     if (!item.isActive) {
-    //       return item;
-    //     }
-    //   });
-    // },
-    // FILTER_DONE: (state) => {
-    //   state.taskList = state.taskList.filter((item) => {
-    //     if (item.isActive) {
-    //       return item;
-    //     }
-    //   });
-    // },
 
-    // NEW_VARIANT: теперь фильтр работает так )
     SET_TASK_FILTER: (state, value) => {
       state.filter = value;
     },
   },
 
   actions: {
-    // payload = {id: 2, text: "tetst", status: sdsf} = task
     updateTask: async (context, payload) => {
       context.commit("UP_DATE_TASK", payload);
       context.commit("SET_EDIT");
@@ -161,19 +133,6 @@ export const store = new Vuex.Store({
     addUser: function (context, payload) {
       context.commit("ADD_USER", payload);
     },
-
-    // OLD_VARIANT: заменяем на один
-    // filterAll: function (context) {
-    //   context.commit("FILTER_ALL");
-    // },
-    // filterInWaiting: function (context) {
-    //   context.commit("FILTER_WAITING");
-    // },
-    // filterDone: function (context) {
-    //   context.commit("FILTER_DONE");
-    // },
-
-    // NEW_VARIANT: заменили на это
     setTaskFilter: function (context, payload) {
       context.commit("SET_TASK_FILTER", payload);
     },
