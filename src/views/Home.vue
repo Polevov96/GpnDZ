@@ -17,11 +17,11 @@ export default {
   components: {
     PageLayout,
   },
-  methods: {
-    login: function () {
-      this.$router.push("/auth/login");
-    },
-  },
+  // methods: {
+  //   login: function () {
+  //     this.$router.push("/auth/login");
+  //   },
+  // },
 };
 </script>
 

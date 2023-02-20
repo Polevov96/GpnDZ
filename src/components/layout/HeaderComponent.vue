@@ -2,7 +2,8 @@
   <div class="nav">
     <nav>
       <router-link to="/auth/login">Login</router-link> |
-      <router-link to="/">About</router-link>
+      <router-link to="/">About</router-link> |
+      <router-link to="/tasklist/task/id">SeparateTask</router-link>
     </nav>
   </div>
 </template>

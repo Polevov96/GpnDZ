@@ -48,6 +48,7 @@ export default {
       }
 
       this.$store.dispatch("activateTask", this.task.id);
+      
     },
     resetTaskText: function () {
       this.newTaskText = "";

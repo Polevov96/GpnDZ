@@ -33,7 +33,7 @@ export const store = new Vuex.Store({
       }
 
       return state.taskList;
-    },
+    },  
   },
   mutations: {
     SET_TASK: (state, payload) => {

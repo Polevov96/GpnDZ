@@ -1,4 +1,4 @@
-import { instance } from "../instance";
+import { httpClient } from "../instance";
 import { apiConstants } from "@/utils/constants";
 
 const { TODOS_API_URL } = apiConstants;
@@ -18,20 +18,30 @@ const { TODOS_API_URL } = apiConstants;
  * @returns Task[]
  */
 export const getTasklist = async () => {
-  return instance.get(TODOS_API_URL).then((response) => {
-    if (response.status !== 200){
-      console.log({
-        status: response.status,
-        text: response.text
-      })
-      return null;
-    }
+  const res = await httpClient.get(TODOS_API_URL);
+  if (res.status !== 200) {
+    const errorMessage = JSON.stringify({
+      text: res.statusText,
+      code: res.status
+    });
+    return new Error(errorMessage);
+  } 
+  return res.data;
+  
+  // .then((response) => {
+  //   if (response.status !== 200){
+  //     console.log({
+  //       status: response.status,
+  //       text: response.text
+  //     })
+  //     return null;
+  //   }
 
-    return response.data;
-  }).catch(error => {
-    console.log(error);
-  })
-}
+  //   return response.data;
+  // }).catch(error => {
+  //   console.log(error);
+  // })
+};
 
 /**
  * Запрос всех задач
@@ -39,12 +49,12 @@ export const getTasklist = async () => {
  * @returns Task[]
  */
 export const getTaskById = async (taskId) => {
-  return instance.get(`${TODOS_API_URL}/${taskId}`).then((response) => {
+  return httpClient.get(`${TODOS_API_URL}/${taskId}`).then((response) => {
     if (response.status !== 200){
       console.log({
         status: response.status,
         text: response.text
-      })
+      });
       return null;
     }
 
@@ -52,5 +62,5 @@ export const getTaskById = async (taskId) => {
   }).catch(error => {
     console.log(error);
   })
-}
+};
 

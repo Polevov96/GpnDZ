@@ -21,6 +21,12 @@ const routes = [  {
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/TasklistPage.vue"),
   },
+  {
+    path: "/tasklist/task/id",
+    name: "/separateTask",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/SeparateTask.vue"),
+  },
 ];
 
 const router = new VueRouter({

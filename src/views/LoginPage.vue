@@ -22,7 +22,7 @@
 
 <script>
 import PageLayout from "@/components/layout/PageLayout.vue";
-import axios from "axios";
+import {getUser} from "../api"
 
 export default {
   name: "LoginPage",
@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    login: function () {
+    login: async function () {
       if (!this.username) {
         alert("не заполненые данные");
         return;
@@ -44,24 +44,39 @@ export default {
       if (!this.password) {
         alert("не заполненые данные");
         return;
-      }
+      } else {
       //TODO: 1) отправить запрос на сервер
-      axios
-        .get("https://jsonplaceholder.typicode.com/users")
-        .then((res) => {
-          const result = res.data.find((user) => {
-            return this.username === user.username;
-          });
-          console.log(result);
-          if (result) {
-            this.$store.dispatch("addUser", result);
-            // Если true 6
-            //TODO: 2) Записать ответ сервера записать в store
-            this.$router.push("/tasklist");
-          }
-          // Если false - вывести ошибку
-        })
-        .catch((err) => console.log(err));
+      const allUsers = await getUser();
+      console.log(allUsers);
+
+      const result = allUsers.find((user) => {
+        return this.username === user.username;
+      }); if(result) {
+      this.$store.dispatch("addUser", result);
+      this.$router.push("/tasklist");
+      } else {
+        alert("неверно имя пользователя или пароль учетной записи")
+      }
+    }
+      
+      
+      // TODO:  проверить на возврат ошибки из api (result instanceof Error)
+      // TODO: переписать логику ниже на новые условия
+
+    //    .then((res) => {
+    //       const result = res.data.find((user) => {
+    //         return this.username === user.username;
+    //       });
+    //       console.log(result);
+    //       if (result) {
+    //         this.$store.dispatch("addUser", result);
+    //         // Если true 6
+    //         //TODO: 2) Записать ответ сервера записать в store
+    //         this.$router.push("/tasklist");
+    //       }
+    //       // Если false - вывести ошибку
+    //     })
+    //     .catch((err) => console.log(err));
     },
   },
 };
