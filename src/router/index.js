@@ -19,7 +19,13 @@ const routes = [  {
     path: "/tasklist",
     name: "tasklistPage",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/TasklistPage.vue"),
+      import(/* webpackChunkName: "tasklist-page" */ "../views/TasklistPage.vue"),
+  },
+  {
+    path: "/tasklist/:id",
+    name: "taskPage",
+    component: () =>
+      import(/* webpackChunkName: "task-page" */ "../views/TaskPage.vue"),
   },
 ];
 
