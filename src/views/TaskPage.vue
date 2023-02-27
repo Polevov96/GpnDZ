@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-/* TODO: добавить стили */
+/* TODO: добавить стили ( не успел еще исправлю )*/
 
 .task {
 
