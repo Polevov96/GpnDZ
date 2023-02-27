@@ -3,7 +3,7 @@
     <StatusBtnVue @click="handleStatusClick" :isActive="task.isActive" />
     <div :class="task.isActive ? 'task__text_active' : ''">
       <div @click="handleTaskClick" class="taskItemText">
-        <span>{{ task.text }}</span>
+        <span @click="openTask">{{ task.text }}</span>
       </div>
     </div>
     <BtnInFormVue @click="handleTaskDelete" class="Delete_button" label="Удалить" />
@@ -31,6 +31,14 @@ export default {
     },
   },
   methods: {
+    openTask: function () {
+      console.log(this.task.id)
+        if (this.task.id) {
+          this.$router.push("/tasklist/:id");
+        } else {
+          alert('error');
+        }
+    },
     handleStatusClick: function () {
        this.$store.dispatch("changeStatus", this.task.id);
     },

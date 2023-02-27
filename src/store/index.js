@@ -6,8 +6,9 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
+    taskListData: localStorage.getItem('taskList') || [],
     user: null,
-    taskList: [],
+    taskList: JSON.parse(localStorage.getItem('taskList')) || [],
     // taskList: [{id: '', text: "", status: 0, isActive: false,  isEdit: false}],
     isEdit: false,
     editTaskId: null,
@@ -69,8 +70,10 @@ export const store = new Vuex.Store({
 
     DELETE_TASK: (state, payload) => {
       state.taskList = state.taskList.filter((item) => {
+        localStorage.removeItem('taskList');
         return item.id !== payload;
       });
+      localStorage.setItem('taskList', JSON.stringify(state.taskList)); 
     },
 
     UP_DATE_TASK: (state, payload) => {
@@ -89,6 +92,8 @@ export const store = new Vuex.Store({
 
     ADD_TASK: (state, payload) => {
       state.taskList.push(payload);
+      localStorage.setItem('taskList', JSON.stringify(state.taskList));
+      // localStorage.setItem(payload.id, JSON.stringify(state));
     },
 
 
