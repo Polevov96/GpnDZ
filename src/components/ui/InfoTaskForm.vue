@@ -2,17 +2,17 @@
     <div class="task_list-form">
       <div class="">
         <div label="Подробное описание" />
-        <div class = "a">Подробное описание</div>
+        <div class = "data_display-form">Подробное описание</div>
         <span v-if="selectedItem">{{selectedItem.text}}</span>
       </div>
       <div class="">
         <div label="Проект" />
-        <div class="a">Проект</div>
+        <div class="data_display-form">Проект</div>
         <span> ttt</span>
       </div>
       <div class="">
         <div label="Отвественный" />
-        <div class="a">Отвественный</div>
+        <div class="data_display-form">Отвественный</div>
         <span>tttt</span>
       </div>
       <div>
@@ -58,7 +58,7 @@
     flex-direction: row;
     
   }
-  .a {
+  .data_display-form {
     background: #b8bac6; /* Old browsers */
 background: -moz-linear-gradient(left, #b8bac6 0%, #b8bac6 19%, #f5f6f6 41%, #f5f6f6 41%, #f5f6f6 41%, #f5f6f6 41%, #f5f6f6 46%, #f5f6f6 59%, #f5f6f6 95%);
 background: -webkit-linear-gradient(left, #b8bac6 0%,#b8bac6 19%,#f5f6f6 41%,#f5f6f6 41%,#f5f6f6 41%,#f5f6f6 41%,#f5f6f6 46%,#f5f6f6 59%,#f5f6f6 95%);

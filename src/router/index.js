@@ -1,8 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
+import NotFound from "@/views/NotFound.vue";
 
 Vue.use(VueRouter);
+
 
 const routes = [  {
     path: "/",
@@ -28,10 +30,9 @@ const routes = [  {
       import(/* webpackChunkName: "task-page" */ "../views/TaskPage.vue"),
   },
   {
-    path: "/tasklist/task/id",
-    name: "/separateTask",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/SeparateTask.vue"),
+      path: '*',
+      name: 'Not Found',
+      component: NotFound
   },
 ];
 
