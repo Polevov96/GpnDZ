@@ -13,7 +13,7 @@
       <BtnInFormVue
         @click="handleTaskClick"
         class="BtnCancel"
-        label="'Отменить'"
+        label="Отменить"
       />
     </div>
     <div v-else class="search-edit-form_btn">

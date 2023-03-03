@@ -2,7 +2,8 @@
   <div v-bind:class="[{ 'task-item_active': isCurrentTaskEdit }, 'task-item']">
     <StatusBtnVue @click="handleStatusClick" :isActive="task.isActive" />
     <div :class="task.isActive ? 'task__text_active' : ''">
-      <div @click="handleTaskClick" class="taskItemText">
+      <!-- @click="handleTaskClick" -->
+      <div  class="taskItemText">
         <span @click="openTask">{{ task.text }}</span>
       </div>
     </div>
@@ -34,7 +35,8 @@ export default {
     openTask: function () {
       console.log(this.task.id)
         if (this.task.id) {
-          this.$router.push("/tasklist/:id");
+          this.$router.push("/tasklist/" + this.task.id);
+          // this.$store.dispatch("openTask",this.task.id);
         } else {
           alert('error');
         }
@@ -45,19 +47,19 @@ export default {
     handleTaskDelete: function () {
       this.$store.dispatch("deleteTask", this.task.id);
     },
-    handleTaskClick: function () {
-      if (
-        this.$store.state.editTaskId === this.task.id &&
-        this.$store.state.isEdit
-      ) {
-        this.resetTaskText();
-        this.$store.dispatch("deactivateTask");
-        return;
-      }
+    // handleTaskClick: function () {
+    //   if (
+    //     this.$store.state.editTaskId === this.task.id &&
+    //     this.$store.state.isEdit
+    //   ) {
+    //     this.resetTaskText();
+    //     this.$store.dispatch("deactivateTask");
+    //     return;
+    //   }
 
-      this.$store.dispatch("activateTask", this.task.id);
+    //   this.$store.dispatch("activateTask", this.task.id);
       
-    },
+    // },
     resetTaskText: function () {
       this.newTaskText = "";
     },

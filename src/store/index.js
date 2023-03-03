@@ -35,8 +35,23 @@ export const store = new Vuex.Store({
 
       return state.taskList;
     },  
+    taskListOpenTaskFilter: (state) => id => {
+      // if (state.filter === taskFiltersConstants.OPEN_TASK) {
+        // eslint-disable-next-line 
+  //  debugger;
+        return state.taskList.find((item) => item.id === parseInt(id));
+      // }
+      // return state.taskList;
+    }
   },
   mutations: {
+    // OPEN_TASK:(state, payload) => {
+    //   state.taskList.map((task) => {
+    //     if (task.id === payload) {
+          
+    //     }
+    //   });
+    // },
     SET_TASK: (state, payload) => {
       state.taskList = payload;
     },
@@ -141,6 +156,9 @@ export const store = new Vuex.Store({
     setTaskFilter: function (context, payload) {
       context.commit("SET_TASK_FILTER", payload);
     },
+    openTask: function(context, payload) {
+      context.commit("OPEN_TASK", payload);
+    }
   },
   modules: {},
 });

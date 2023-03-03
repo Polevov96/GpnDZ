@@ -4,6 +4,7 @@ export const taskFiltersConstants = {
 	"ALL": "all",
 	"IN_PROGRESS": "inProgress",
 	"DONE": "done",
+	"OPEN_TASK": "openTask",
 }
 
 export const apiConstants = {

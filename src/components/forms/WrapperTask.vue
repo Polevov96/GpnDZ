@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <EditingTaskForm />
-    <InfoTaskForm />
+    <InfoTaskForm :selectedItem="getTaskList"/>
   </div>
 </template>
 
@@ -16,12 +16,25 @@ export default {
     EditingTaskForm,
     InfoTaskForm
   },
-};
+  props: {
+      selectedItem: {
+        type: Object,
+        default: null,
+      },
+},
+computed: {
+    getTaskList() {
+      // console.log(this.$store.getters.taskListOpenTaskFilter(this.$route.params.id))
+      return this.$store.getters.taskListOpenTaskFilter(this.$route.params.id);
+      // return this.$store.state.taskList;
+    },
+}
+}
 </script>
 
 <style scoped>
 .wrapper {
-  padding: 20px;
+  padding: 30px;
   width: 530px;
   height: 330px;
   background-color: white;

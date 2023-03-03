@@ -6,15 +6,15 @@
         type="text"
       />
     </div>
-    <div  class="search-edit-form_btn">
+    <div class="search-edit-form_btn">
       <BtnInFormVue class="BtnSave" label="Сохранить" />
       <BtnInFormVue
         class="BtnCancel"
-        label="'Отменить'"
+        label="Отменить"
       />
     </div>
     <div class="search-edit-form_btn">
-      <BtnInFormVue  label="редактировать" />
+      <BtnInFormVue  label="Редактировать" />
     </div>
   </div>
 </template>
