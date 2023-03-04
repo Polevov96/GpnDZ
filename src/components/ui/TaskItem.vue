@@ -21,7 +21,6 @@ export default {
     BtnInFormVue,
     StatusBtnVue,
   },
-  
   props: {
     /**
      * @return Object  {id: 1, text: "test", status: 0}
@@ -35,7 +34,7 @@ export default {
     openTask: function () {
       console.log(this.task.id)
         if (this.task.id) {
-          this.$router.push("/tasklist/" + this.task.id);
+          this.$router.push(`/tasklist/${this.task.id}`);
           // this.$store.dispatch("openTask",this.task.id);
         } else {
           alert('error');

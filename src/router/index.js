@@ -24,16 +24,29 @@ const routes = [  {
       import(/* webpackChunkName: "tasklist-page" */ "../views/TasklistPage.vue"),
   },
   {
-    path: "/tasklist/:id",
+    path: "/tasklist/:id(\\d+)",
     name: "taskPage",
+    // redirect: to => {
+    //   if (to.params.id) {
+    //     return ;
+        
+    //    } else {
+    //     return '/404';
+    //    }},
+   
     component: () =>
       import(/* webpackChunkName: "task-page" */ "../views/TaskPage.vue"),
-  },
-  {
-      path: '*',
-      name: 'Not Found',
-      component: NotFound
-  },
+    },
+  { 
+    path: '/404', 
+    name: '404', 
+    component: NotFound, 
+  }, 
+  { 
+    path: '*', 
+    redirect: '/404' 
+  }
+  
 ];
 
 const router = new VueRouter({
