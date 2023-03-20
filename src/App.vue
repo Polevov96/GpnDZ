@@ -21,12 +21,12 @@ export default {
 #app {
   width: 100%;
   min-height: 100vh;
-  background-color: black;
+  background-color:#344054;
+  background-image: url("@/assets/fon.png");
   display: flex;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 52px 363px 0px 357px;
   margin: 0px;
-  background-image: url("@/assets/fon.png");
   flex-direction: column;
   align-items: center;
 }
@@ -34,4 +34,5 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 </style>

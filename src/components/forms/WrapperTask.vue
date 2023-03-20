@@ -7,8 +7,8 @@
 
 <script>
 
-import EditingTaskForm from '../ui/EditingTaskForm.vue';
-import InfoTaskForm from '@/components/ui/InfoTaskForm.vue'
+import EditingTaskForm from './EditingTaskForm.vue';
+import InfoTaskForm from './InfoTaskForm.vue'
 
 export default {
   name: "WrapperTask",
@@ -24,9 +24,7 @@ export default {
 },
 computed: {
     getTaskList() {
-      // console.log(this.$store.getters.taskListOpenTaskFilter(this.$route.params.id))
-      return this.$store.getters.taskListOpenTaskFilter(this.$route.params.id);
-      // return this.$store.state.taskList;
+      return this.$store.getters.selectTaskById(this.$route.params.id);
     },
 }
 }
@@ -34,12 +32,15 @@ computed: {
 
 <style scoped>
 .wrapper {
-  padding: 30px;
-  width: 530px;
-  height: 330px;
+  padding: 60px 154px 60px 172px;
+  width: 874.02px;
+  height: 1588.019px;
+  left: 360px;
+  top: 60px;
   background-color: white;
-  overflow: auto;
-  border-radius: 6px;
+  /* overflow: auto; */
+  border-radius: 50px;
   margin: 1px;
+  justify-content:center;
 }
 </style>

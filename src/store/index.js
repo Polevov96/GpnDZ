@@ -6,7 +6,6 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    taskListData: localStorage.getItem('taskList') || [],
     user: null,
     taskList: JSON.parse(localStorage.getItem('taskList')) || [],
     // taskList: [{id: '', text: "", status: 0, isActive: false,  isEdit: false}],
@@ -23,11 +22,11 @@ export const store = new Vuex.Store({
     // return state.taskList
 
     // NEW_VARIANT: так понятнее, в верхнем регистре нужно писать только мутации, остальное не нужно! негласное правило
-    tasklistWithFilters: (state) => {
+    filteredTasklist: (state) => {
       // NEW_VARIANT:  так стало
       if (state.filter === taskFiltersConstants.IN_PROGRESS) {
         return state.taskList.filter((item) => !item.isActive);
-      }
+      }102
 
       if (state.filter === taskFiltersConstants.DONE) {
         return state.taskList.filter((item) => item.isActive);
@@ -35,7 +34,7 @@ export const store = new Vuex.Store({
 
       return state.taskList;
     },  
-    taskListOpenTaskFilter: (state) => id => {
+    selectTaskById: (state) => id => {
       // if (state.filter === taskFiltersConstants.OPEN_TASK) {
         // eslint-disable-next-line 
   //  debugger;
@@ -45,13 +44,6 @@ export const store = new Vuex.Store({
     }
   },
   mutations: {
-    // OPEN_TASK:(state, payload) => {
-    //   state.taskList.map((task) => {
-    //     if (task.id === payload) {
-          
-    //     }
-    //   });
-    // },
     SET_TASK: (state, payload) => {
       state.taskList = payload;
     },
@@ -108,7 +100,6 @@ export const store = new Vuex.Store({
     ADD_TASK: (state, payload) => {
       state.taskList.push(payload);
       localStorage.setItem('taskList', JSON.stringify(state.taskList));
-      // localStorage.setItem(payload.id, JSON.stringify(state));
     },
 
 

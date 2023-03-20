@@ -16,9 +16,9 @@ export default {
 
 <style scoped>
 .form-in_button{
-  margin-bottom: 3px;
   background: none;
   border: none;
   cursor: pointer;
+  display: flex;
 }
 </style>

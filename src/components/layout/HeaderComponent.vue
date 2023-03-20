@@ -1,9 +1,9 @@
 <template>
   <div class="nav">
     <nav>
-      <router-link to="/auth/login">Login</router-link> |
+      <!-- <router-link to="/auth/login">Login</router-link> |
       <router-link to="/">About</router-link> |
-      <router-link to="/tasklist/:id">SeparateTask</router-link>
+      <router-link to="/tasklist/:id">SeparateTask</router-link> -->
     </nav>
   </div>
 </template>

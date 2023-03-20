@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import SearhEditFormVue from "../ui/SearhEditForm.vue";
-import TaskListFormVue from "../ui//TaskListForm.vue"; //Форма списка задач Vue
+import SearhEditFormVue from "./SearhEditForm.vue";
+import TaskListFormVue from "./TaskListForm.vue"; //Форма списка задач Vue
 
 export default {
   name: "WrapperTodo",
@@ -20,12 +20,15 @@ export default {
 
 <style scoped>
 .wrapper {
-  padding: 20px;
-  width: 530px;
-  height: 330px;
+  padding: 60px 154px 60px 172px;
+  width: 874.02px;
+  height: 1588.019px;
+  left: 360px;
+  top: 60px;
   background-color: white;
-  overflow: auto;
-  border-radius: 6px;
+  /* overflow: auto; */
+  border-radius: 50px;
   margin: 1px;
+  justify-content:center;
 }
 </style>
