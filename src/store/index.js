@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     user: null,
-    taskList: JSON.parse(localStorage.getItem('taskList')) || [],
+    taskList: JSON.parse(localStorage.getItem('taskList')) ||  [{id: '', text: "", status: 0, isActive: false,  isEdit: false}],
     // taskList: [{id: '', text: "", status: 0, isActive: false,  isEdit: false}],
     isEdit: false,
     editTaskId: null,
@@ -26,7 +26,7 @@ export const store = new Vuex.Store({
       // NEW_VARIANT:  так стало
       if (state.filter === taskFiltersConstants.IN_PROGRESS) {
         return state.taskList.filter((item) => !item.isActive);
-      }102
+      }
 
       if (state.filter === taskFiltersConstants.DONE) {
         return state.taskList.filter((item) => item.isActive);
@@ -53,6 +53,7 @@ export const store = new Vuex.Store({
 
     SET_EDIT: (state, payload) => {
       state.isEdit = payload;
+  
     },
 
     SET_EDITTASKID: (state, payload) => {
@@ -77,10 +78,25 @@ export const store = new Vuex.Store({
 
     DELETE_TASK: (state, payload) => {
       state.taskList = state.taskList.filter((item) => {
-        localStorage.removeItem('taskList');
         return item.id !== payload;
       });
-      localStorage.setItem('taskList', JSON.stringify(state.taskList)); 
+      localStorage.setItem('taskList', JSON.stringify(state.taskList));
+       
+    // }
+    
+      //    state.taskList = state.taskList.filter((item) => {
+      //     console.log(state.taskList.length);
+      //   console.log(item);
+      //   payload =  state.taskList.findIndex(item => item.id === payload);
+      //   console.log(payload);
+      //  return state.taskList.slice(payload, payload+1);
+      // });
+      // localStorage.setItem('taskList', JSON.stringify(state.taskList));
+      
+      // if(state.taskList.length <= +1) {
+      //  localStorage.removeItem('taskList');
+      //  localStorage.setItem('taskList', JSON.stringify(state.taskList));
+      // }
     },
 
     UP_DATE_TASK: (state, payload) => {
@@ -114,7 +130,9 @@ export const store = new Vuex.Store({
       context.commit("SET_EDIT");
       context.commit("SET_EDITTASKID", null);
     },
-
+    setEdit: async (context, payload) => {
+      context.commit("SET_EDIT", payload);
+    },
     changeStatus: async (context, payload) => {
       context.commit("CHANGE_STATUS", payload);
     },

@@ -24,6 +24,7 @@
 </template>
 
 <script>
+
 import { required, minLength } from "vuelidate/lib/validators";
 import BtnInFormVue from "./BtnInForm.vue";
 
@@ -40,6 +41,7 @@ export default {
       nextTodoId: 1,
       status: 0,
       isActive: false,
+
     };
   },
   validations: {

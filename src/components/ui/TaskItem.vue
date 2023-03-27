@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     openTask: function () {
-      console.log(this.task.id)
         if (this.task.id) {
           this.$router.push(`/tasklist/${this.task.id}`);
         } else {

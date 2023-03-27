@@ -39,8 +39,8 @@ computed: {
   top: 60px;
   background-color: white;
   /* overflow: auto; */
-  border-radius: 50px;
-  margin: 1px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
   justify-content:center;
 }
 </style>

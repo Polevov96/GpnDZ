@@ -1,19 +1,19 @@
-<template>
+<template> 
     <div class="task_list-form">
       <div class="task_list_form-information">
         <div label="Подробное описание" />
-        <div class = "data_display-form">Подробное описание <img src="@/assets/Vector (1).png"  v-if="false"  class="pencil"></div>
-        <div class="task_list_form_information-text"><span class="task-item_text" v-if="selectedItem">{{selectedItem.text}}</span></div>
+        <div class = "data_display-form">Подробное описание <img @click="editingDescription" src="@/assets/Vector (1).png"  v-if="isEditTask"  class="pencil"></div>
+        <div class="task_list_form_information-text"><span :contenteditable='editingDescriptionText' class="task-item_text" v-if="selectedItem">{{selectedItem.text}}</span></div>
       
         <div label="Проект" />
-        <div class="data_display-form">Проект <img src="@/assets/Vector.png"  v-if="false"  class="pencil"></div>
-        <div id="project" class="task_list_form_information-text"> <span id="project" class="task-item_text"> ttt</span></div>
+        <div class="data_display-form">Проект <img src="@/assets/Vector.png"  v-if="isEditTask"  class="pencil"></div>
+        <div id="project" class="task_list_form_information-text"> <span id="project" class="task-item_text"></span></div>
         <div label="Отвественный" />
-        <div class="data_display-form">Отвественный <img src="@/assets/Vector.png"  v-if="false"  class="pencil"></div>
-        <div id="Responsible" class="task_list_form_information-text"> <span id="Responsible" class="task-item_text" >tttt</span></div>
+        <div class="data_display-form">Отвественный <img src="@/assets/Vector.png"  v-if="isEditTask"  class="pencil"></div>
+        <div id="Responsible" class="task_list_form_information-text"> <span id="Responsible" class="task-item_text" ></span></div>
       </div>
       <div class="delete_button">
-      <BtnInFormVue id="delete" label="Удалить"/>
+      <BtnInFormVue @click="handleTaskDelete" id="delete" label="Удалить"/>
     </div>
     </div>
   </template>
@@ -28,15 +28,49 @@
     components: {
       BtnInFormVue,
     },
+    data: () => {
+      return {
+        editingDescriptionText: false,
+      }
+    },
+
     props: {
       selectedItem: {
         type: Object,
         default: null,
       },
-}
+    },
+      methods: {
+    handleTaskDelete: function () {
+      this.$store.dispatch("deleteTask", this.selectedItem.id);
+      this.$router.push(`/tasklist`);
+    },
+    resetTaskText: function () {
+      this.newTaskText = "";
+    },
+    editingDescription: function() {
+      if(this.editingDescriptionText) {
+        console.log(this.editingDescriptionText);
+        this.editingDescriptionText = false;
+      } else  {
+        console.log(this.editingDescriptionText);
+        this.editingDescriptionText =  true;
+      }
+    },
+  },
 
-
-  };
+    computed: {
+    getTaskList() {
+      return this.$store.getters.selectTaskById(this.$route.params.id);
+    },
+    isCurrentTaskEdit() {
+      return this.$store.state.editTaskId === this.task.id;
+    },
+    isEditTask() {
+      return this.$store.state.isEdit
+    }
+  }
+};
   </script>
   
   <style scoped>

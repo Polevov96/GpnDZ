@@ -1,7 +1,6 @@
 <template>
   <PageLayout :useHeader="true">
     <template v-slot:content>
-      <!-- FIXME: где сам класс? почему не в разделе стилей? -->
       <div class="task-list-page">
         <WrapperTodo />
       </div>
@@ -24,8 +23,8 @@ export default {
 <style>
 .task-list-page {
   display: flex;
-  justify-content: flex-start;
-  padding: 20px;
+  justify-content: center;
+  padding: 20px 20px 0px 20px;
   margin: 0px;
   flex-direction: column;
   align-items: center;

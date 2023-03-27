@@ -40,6 +40,11 @@ export default {
 /* TODO: добавить стили ( не успел еще исправлю )*/
 
 .task {
-
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px 20px 0px 20px;
+  margin: 0px;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

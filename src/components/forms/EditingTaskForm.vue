@@ -5,17 +5,17 @@
         class="add-text_input"
         type="text"
         placeholder="Заголовок задачи"
-      /> <img v-if="false" src="@/assets/Vector.png" class="pencil">
+      /> <img v-if="isEditTask" src="@/assets/Vector.png" class="pencil">
     </div>
-    <div v-if="false" class="search-edit-form_btn">
-      <BtnInFormVue id="Cancel" class="BtnSave" label="Отменить" />
-      <BtnInFormVue id="Save" 
+    <div v-if="isEditTask" class="search-edit-form_btn">
+      <BtnInFormVue @click="isEditTaskItem" id="Cancel" class="BtnSave" label="Отменить" />
+      <BtnInFormVue @click="isEditTaskItem" id="Save" 
         class="BtnCancel"
         label="Сохранить"
       />
     </div>
     <div v-else class="search-edit-form_btn">
-      <BtnInFormVue id="Edit"  label="Редактировать" />
+      <BtnInFormVue @click="isEditTaskItem" id="Edit"  label="Редактировать" />
     </div>
   </div>
 </template>
@@ -30,8 +30,22 @@ export default {
   components: {
     BtnInFormVue,
   },
+  
+  methods: {
+    isEditTaskItem: function(){
+      if(this.isEditTask) {
+        this.$store.dispatch("setEdit", false);
+      } else  {
+        this.$store.dispatch("setEdit", true);
+      }
+    }
+  },
 
-
+  computed: {
+  isEditTask() {
+      return this.$store.state.isEdit
+    },
+  }
 };
 </script>
 
