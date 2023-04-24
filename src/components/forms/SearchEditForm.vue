@@ -8,15 +8,15 @@
         placeholder="Введите текст задачи..."
       />
     </div>
-    <div v-if="isEdit" class="search-edit-form_btn">
+    <!-- <div v-if="isEdit" class="search-edit-form_btn">
       <BtnInFormVue @click="updateTaskItem" class="BtnSave" label="Сохранить" />
       <BtnInFormVue
         @click="handleTaskClick"
         class="BtnCancel"
         label="Отменить"
       />
-    </div>
-    <div v-else class="search-edit-form_btn">
+    </div> -->
+    <div  class="search-edit-form_btn">
       <BtnInFormVue  @click="addTextTask" label="Добавить" />
       <BtnInFormVue @click="resetTaskText" label="Отчистить" />
     </div>
@@ -54,7 +54,7 @@ export default {
     isEdit: function (value) {
       if (value) {
         const activeTask = this.getTaskList.find(
-          (task) => task.id == this.$store.state.editTaskId
+          (task) => task.id == this.$store.state.taskModules.editTaskId
         );
 
         this.newTaskText = activeTask.text;
@@ -66,23 +66,25 @@ export default {
 
   methods: {
     addTextTask: function () {
-      if (this.$v.$error) {
+      if (this.$v.$error ) {
         return;
       }
-      this.$store.dispatch("addTask", this.newTaskText);
+      if (this.newTaskText.length >= 3){
+      this.$store.dispatch("taskModules/addTask", this.newTaskText);
       this.resetTaskText();
+    }
     },
-    updateTaskItem: function () {
-      const updateTask = {
-        id: this.$store.state.editTaskId,
-        text: this.newTaskText,
-      };
-      this.resetTaskText();
-      this.$store.dispatch("updateTask", updateTask);
-    },
+    // updateTaskItem: function () {
+    //   const updateTask = {
+    //     id: this.$store.state.taskModules.editTaskId,
+    //     text: this.newTaskText,
+    //   };
+    //   this.resetTaskText();
+    //   this.$store.dispatch("taskModules/updateTask", updateTask);
+    // },
     handleTaskClick: function () {
       this.resetTaskText();
-      this.$store.dispatch("deactivateTask");
+      this.$store.dispatch("taskModules/deactivateTask");
     },
     resetTaskText: function () {
       this.newTaskText = "";
@@ -90,10 +92,10 @@ export default {
   },
   computed: {
     getTaskList() {
-      return this.$store.state.taskList;
+      return this.$store.state.taskModules.taskList;
     },
     isEdit() {
-      return this.$store.state.isEdit;
+      return this.$store.state.taskModules.isEdit;
     },
   },
 };

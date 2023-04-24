@@ -8,6 +8,7 @@ import { httpClient } from "../instance";
  * @returns User || null
  */
 export const login = async function(login, password){
+  console.log("запустился метод login");
   return httpClient.post("", {
     login,
     password
@@ -16,7 +17,7 @@ export const login = async function(login, password){
       console.log({
         status: response.status,
         text: response.text
-      })
+      });
       return null;
     }
 
@@ -24,7 +25,7 @@ export const login = async function(login, password){
 
   }).catch(error => {
     console.log(error);
-  })
+  });
 };
 
 // TODO: реализовать метод logout аналогично login

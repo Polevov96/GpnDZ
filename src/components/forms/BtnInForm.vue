@@ -20,5 +20,6 @@ export default {
   border: none;
   cursor: pointer;
   display: flex;
+  user-select: none;
 }
 </style>

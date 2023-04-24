@@ -20,7 +20,7 @@ import BtnInFormVue from "./BtnInForm.vue";
 
 // NEW_VARIANT: добавил константы выполнения задач
 // eslint-disable-next-line
-import { taskFiltersConstants } from "@/utils/constants";
+import { FiltersConstants } from "@/utils/constants";
 
 export default {
   name: "TaskListForm",
@@ -31,17 +31,16 @@ export default {
 
   methods: {
     setFilter(value) {
-      this.$store.dispatch("setTaskFilter", value);
+      this.$store.dispatch("taskModules/setTaskFilter", value);
     },
   },
   computed: {
     getTaskList() {
-
-      return this.$store.getters.filteredTasklist;
+      return this.$store.getters['taskModules/filteredTasklist'];
     },
 
     filtersValue() {
-      return taskFiltersConstants;
+      return FiltersConstants;
     },
   },
 };

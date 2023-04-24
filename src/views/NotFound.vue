@@ -1,4 +1,4 @@
-<template>
+<template >
     <center>
       <h1>Not Found!</h1>
       <p>

@@ -13,5 +13,5 @@ export const getUser = async () => {
         });
         return new Error(errorMessage);
     }
-    return res.data;
+        return res.data;
 }

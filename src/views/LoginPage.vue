@@ -37,6 +37,8 @@ export default {
   },
   methods: {
     login: async function () {
+      
+      // eslint-disable-next-line no-debugger
       if (!this.username) {
         alert("не заполненые данные");
         return;
@@ -47,12 +49,13 @@ export default {
       } else {
       //TODO: 1) отправить запрос на сервер
       const allUsers = await getUser();
-      console.log(allUsers);
+      // console.log(allUsers);
 
       const result = allUsers.find((user) => {
         return this.username === user.username;
-      }); if(result) {
-      this.$store.dispatch("addUser", result);
+      }); 
+      if(result) {
+      this.$store.dispatch("taskModules/addUser", result);
       this.$router.push("/tasklist");
       } else {
         alert("неверно имя пользователя или пароль учетной записи")

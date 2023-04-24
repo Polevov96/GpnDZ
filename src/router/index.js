@@ -24,16 +24,22 @@ const routes = [  {
       import(/* webpackChunkName: "tasklist-page" */ "../views/TasklistPage.vue"),
   },
   {
+    
+    path: "/projectsList",
+    name: "projectsListPage",
+    component: () =>
+      import(/* webpackChunkName: "projectslist-page" */ "../views/ProjectsListPage.vue"),
+  
+  },
+  {
+    path: "/projectsList/:id(\\d+)",
+    name: "projectPage",
+    component: () =>
+      import(/* webpackChunkName: "project-page" */ "../views/ProjectPage.vue"),
+    },
+  {
     path: "/tasklist/:id(\\d+)",
     name: "taskPage",
-    // redirect: to => {
-    //   if (to.params.id) {
-    //     return ;
-        
-    //    } else {
-    //     return '/404';
-    //    }},
-   
     component: () =>
       import(/* webpackChunkName: "task-page" */ "../views/TaskPage.vue"),
     },
@@ -56,3 +62,8 @@ const router = new VueRouter({
 });
 
 export default router;
+
+// const VueRouterPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push (to) {
+//   return VueRouterPush.call(this, to).catch(err => err);
+// };

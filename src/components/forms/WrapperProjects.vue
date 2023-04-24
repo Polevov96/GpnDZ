@@ -1,27 +1,21 @@
 <template>
   <div class="wrapper">
-    <SearchEditFormVue />
-    <TaskListFormVue />
+    <SearchEditFormProjects />
+    <ProjectsListFormVue />
   </div>
 </template>
 
 <script>
-import SearchEditFormVue from "./SearchEditForm.vue";
-import TaskListFormVue from "./TaskListForm.vue"; //Форма списка задач Vue
+import SearchEditFormProjects from "./SearchEditFormProjects.vue";
+import ProjectsListFormVue from "./ProjectsListForm.vue";
 
 export default {
-  name: "WrapperTodo",
+  name: "WrapperProjects",
   components: {
-    SearchEditFormVue,
-    TaskListFormVue,
+    SearchEditFormProjects,
+    ProjectsListFormVue,
   },
-  // created() {
-  //       // eslint-disable-next-line no-debugger
-  //       debugger;
-  // }
 };
-
-
 </script>
 
 <style scoped>

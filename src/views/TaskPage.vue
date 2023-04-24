@@ -21,7 +21,7 @@ export default {
    
   methods: {
     getTaskList() {
-      const searchTask = this.$store.getters.selectTaskById(this.$route.params.id);
+      const searchTask = this.$store.getters['taskModules/selectTaskById'](this.$route.params.id);
       
       if(!searchTask) {
         this.$router.push("/404"); 

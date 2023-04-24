@@ -7,4 +7,4 @@ import { apiConstants } from "@/utils/constants";
  */
 export const httpClient = axios.create({
   baseURL: apiConstants.BASE_API_URL,
-})
+});
