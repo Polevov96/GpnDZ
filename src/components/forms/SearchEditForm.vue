@@ -8,14 +8,6 @@
         placeholder="Введите текст задачи..."
       />
     </div>
-    <!-- <div v-if="isEdit" class="search-edit-form_btn">
-      <BtnInFormVue @click="updateTaskItem" class="BtnSave" label="Сохранить" />
-      <BtnInFormVue
-        @click="handleTaskClick"
-        class="BtnCancel"
-        label="Отменить"
-      />
-    </div> -->
     <div  class="search-edit-form_btn">
       <BtnInFormVue  @click="addTextTask" label="Добавить" />
       <BtnInFormVue @click="resetTaskText" label="Отчистить" />
@@ -39,7 +31,6 @@ export default {
     return {
       newTaskText: "",
       nextTodoId: 1,
-      status: 0,
       isActive: false,
 
     };
@@ -48,19 +39,6 @@ export default {
     newTaskText: {
       required,
       minLength: minLength(3),
-    },
-  },
-  watch: {
-    isEdit: function (value) {
-      if (value) {
-        const activeTask = this.getTaskList.find(
-          (task) => task.id == this.$store.state.taskModules.editTaskId
-        );
-
-        this.newTaskText = activeTask.text;
-      } else {
-        this.resetTaskText();
-      }
     },
   },
 
@@ -74,29 +52,21 @@ export default {
       this.resetTaskText();
     }
     },
-    // updateTaskItem: function () {
-    //   const updateTask = {
-    //     id: this.$store.state.taskModules.editTaskId,
-    //     text: this.newTaskText,
-    //   };
+    // handleTaskClick: function () {
     //   this.resetTaskText();
-    //   this.$store.dispatch("taskModules/updateTask", updateTask);
+    //   this.$store.dispatch("taskModules/deactivateTask");
     // },
-    handleTaskClick: function () {
-      this.resetTaskText();
-      this.$store.dispatch("taskModules/deactivateTask");
-    },
     resetTaskText: function () {
       this.newTaskText = "";
     },
   },
   computed: {
-    getTaskList() {
-      return this.$store.state.taskModules.taskList;
-    },
-    isEdit() {
-      return this.$store.state.taskModules.isEdit;
-    },
+    // getTaskList() {
+    //   return this.$store.state.taskModules.taskList;
+    // },
+    // isEdit() {
+    //   return this.$store.state.taskModules.isEdit;
+    // },
   },
 };
 </script>

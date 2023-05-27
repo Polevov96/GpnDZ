@@ -3,7 +3,7 @@
       <div class="task_list_form-information">
         <div label="Отвественный" />
         <div class="data_display-form">Отвественный <span v-if="getInputStatusChanges"  class="pencil"></span></div>
-        <div id="Responsible" class="task_list_form_information-text"> <input v-model="message" :disabled="!getInputStatusChanges" id="Responsible" class="task-item_text"  /></div>
+        <div id="Responsible" class="task_list_form_information-text"> <input v-model="getOwner.username" :disabled="!getInputStatusChanges" id="Responsible" class="task-item_text"  /></div>
       </div>
       <div class="delete_button">
       <BtnInFormVue @click="handleTaskDelete" id="delete" label="Удалить"/>
@@ -62,6 +62,11 @@
     get () {
         return this.$store.getters['projectModules/selectProjectById'](this.$route.params.id);
     },
+  },
+  getOwner:  {
+    get () {
+      return this.$store.state.userModules.user;
+    }
   },
 }
 };

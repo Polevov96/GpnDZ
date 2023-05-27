@@ -14,10 +14,6 @@ export default {
     // TODO: реализовать логику компонента.
 
     components: { WrapperTask },
-  // created() {
-  //   const serchId = this.$route.params.id;
-  //   this.selectedItem = this.$store.getters.taskListOpenTaskFilter(serchId);
-  // }
    
   methods: {
     getTaskList() {
@@ -26,9 +22,9 @@ export default {
       if(!searchTask) {
         this.$router.push("/404"); 
       }
-      // console.log(this.$store.getters.taskListOpenTaskFilter(this.$route.params.id))
-      return searchTask;
-      // return this.$store.state.taskList;
+
+       return searchTask;
+
     },
 
 }
@@ -37,7 +33,6 @@ export default {
 </script>
 
 <style scoped>
-/* TODO: добавить стили ( не успел еще исправлю )*/
 
 .task {
   display: flex;

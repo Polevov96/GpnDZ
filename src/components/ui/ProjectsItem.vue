@@ -3,7 +3,7 @@
       <StatusBtnVue @click="handleStatusClick" :isActive="project.isActive" />
       <div :class="project.isActive ? 'project-text_active' : ''">
         <div  class="project-item_text">
-          <div @click="updateProject">{{ project.text }}</div>
+          <div required @click="updateProject">{{ project.text }}</div>
         </div>
       </div>
       <BtnInFormVue @click="handleTaskDelete" class="delete_button" label="Удалить" />
@@ -40,8 +40,8 @@
           }
       },
       handleStatusClick: function () {
-        console.log(this.project.id);
-        console.log(this.project.isActive);
+        // console.log(this.project.id);
+        // console.log(this.project.isActive);
         this.$store.dispatch("projectModules/changeStatus", this.project.id);
       },
       handleTaskDelete: function () {

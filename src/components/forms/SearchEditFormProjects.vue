@@ -30,8 +30,7 @@
     data: () => {
       return {
         newProjectText: "",
-        newProjectId: 1,
-        isActive: false,
+
       };
     },
     validations: {
@@ -41,19 +40,6 @@
       },
     },
 
-    watch: {
-    isEdit: function (value) {
-      if (value) {
-        const activeTask = this.getTaskList.find(
-          (task) => task.id == this.$store.state.taskModules.editTaskId
-        );
-
-        this.newTaskText = activeTask.text;
-      } else {
-        this.resetProjectText();
-      }
-    },
-  },
     methods: {
       addProject: function () {
       if (this.$v.$error ) {
@@ -69,12 +55,12 @@
     },
     },
     computed: {
-      getProject() {
-      return this.$store.state.projectModules.projects;
-    },
-      isEdit() {
-      return this.$store.state.projectModules.isEdit;
-    },
+    //   getProject() {
+    //   return this.$store.state.projectModules.projects;
+    // },
+    //   isEdit() {
+    //   return this.$store.state.projectModules.isEdit;
+    // },
     },
   };
   </script>

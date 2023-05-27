@@ -47,9 +47,9 @@ computed: {
       // return this.$store.getters.selectTaskById(this.$route.params.id);
 
     },
-    isEditTask() {
-      return this.$store.state.taskModules.isEdit
-    },
+    // isEditTask() {
+    //   return this.$store.state.taskModules.isEdit
+    // },
     getInputStatusChanges() {
       return this.$store.state.taskModules.inputStatusChanges
     },

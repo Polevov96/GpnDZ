@@ -1,15 +1,12 @@
 <template>
   <div class="search-Edit-Form">
     <div class="text_input">
-      <!-- :v-model="this.$store.state.taskList.text" -->
-      <!-- :value=getTaskList.text -->
       <input
         class="add-text_input"
         type="text"
         placeholder="Заголовок задачи"
-        v-model.trim="$v.message.$model.text"
+        v-model="message"
         :disabled="!getInputStatusChanges"
-        
       /><img v-if="getInputStatusChanges" src="@/assets/Vector.png" class="pencil">
     </div>
     <div v-if="getInputStatusChanges" class="search-edit-form_btn">
@@ -29,7 +26,8 @@
 
 
 import BtnInFormVue from "./BtnInForm.vue";
-import { required, minLength } from "vuelidate/lib/validators";
+// import { required, minLength } from "vuelidate/lib/validators";
+
 
 export default {
   name: "EditingTaskForm",
@@ -37,100 +35,58 @@ export default {
   components: {
     BtnInFormVue,
   },
+
   data: ()  => {
       return {
      newText: "",
      nextTodoId: 1,
       }
     },
+
   props: {
       selectedItem: {
         type: Object,
         default: null,
       }
       },
-      validations: {
-        message: {
-          text: {
-      required,
-      minLength: minLength(3),
-    }},
-  },
+
+ //TODO:не работает, я не понимаю почему Давид помоги плиз)
+  // validations: {
+  //   newText: {
+  //     required,
+  //     minLength: minLength(3),
+  //   },
+  //     message: {
+  //         minLength: minLength(3),
+  //         required
+  //       },
+  // },
+
   methods: {
     isEditTaskItem: function(){
       if(this.getInputStatusChanges) {
-        // this.$store.dispatch("taskModules/setEdit", false);
         this.$store.dispatch("taskModules/changesInputStatus", false);
       } else  {
-        //this.$store.dispatch("taskModules/setEdit", true);
         this.$store.dispatch("taskModules/changesInputStatus", true);
-        // location.reload();
       }
     },
-    getFormValues () {
-      // console.log(this.message.text.type);
-      if(this.message.text != "") {
-        
-        // console.log(this.$store.state.taskModules.editTaskId)
-        const updateTask = {
-        id: this.message.id,
-        text: this.message.text,
-      };
-      // console.log(this.message.text);
-      // this.resetTaskText();
-      this.$store.dispatch("taskModules/updateTask", updateTask);
+    getFormValues() {
+      this.$store.dispatch("taskModules/updateTask", this.$route.params.id);
       }
-       else if (this.message.text.type === undefined) {
-        alert("строка не может быть пустой");
-       }
-      return this.message;
-      // alert("строка не может быть пустой");
-      // console.log(this.getTaskList);
-      // console.log("я тут")
-      //       console.log(this.message.text);
-            
-        },
-        resetTaskText: function () {
-      this.newText = "";
-    },
-
-
-  },
-  watch: {
-
-    getFormValues: function (value) {
-      if (value) {
-        const activeTask = this.getTaskList.find(
-          (task) => task.id == this.$store.state.taskModules.editTaskId
-        );
-        this.newText = activeTask.text;
-      } else {
-        this.resetTaskText();
-      }
-    },
-
   },
 
   computed: {
-
     getInputStatusChanges() {
       return this.$store.state.taskModules.inputStatusChanges
     },
-
-     getTaskList() {
-      return this.$store.state.taskModules.taskList;
-    },
-
-    message: {
+  message: {
     get () {
-     return this.$store.getters['taskModules/selectTaskById'](this.$route.params.id);
+     return this.$store.getters['taskModules/selectTaskById'](this.$route.params.id).text;
     },
-
-  //   set (value) {
-  //     console.log(value);
-  //     // this.$store.commit('updateMessage', value)
-  //     this.getFormValues();
-  //   }
+    set (value) {
+    this.newText = value;
+    this.$store.dispatch("taskModules/addNewTaskText", this.newText);
+    }
    }
   }
 };

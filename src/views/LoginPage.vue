@@ -2,7 +2,7 @@
   <PageLayout :useHeader="false">
     <template v-slot:content>
       <div class="home">
-        <form class="login" @submit.prevent="login">
+        <form class="login" >
           <label>Имя пользователя</label>
           <input required v-model="username" type="text" placeholder="Login" />
           <label>Password</label>
@@ -13,8 +13,8 @@
             placeholder="Password"
           />
           <hr />
-          <button @click="login" type="submit">Login</button>
         </form>
+        <button @click="login" type="submit">Login</button>
       </div>
     </template>
   </PageLayout>
@@ -54,8 +54,9 @@ export default {
       const result = allUsers.find((user) => {
         return this.username === user.username;
       }); 
+      
       if(result) {
-      this.$store.dispatch("taskModules/addUser", result);
+      this.$store.dispatch("userModules/addUser", result);
       this.$router.push("/tasklist");
       } else {
         alert("неверно имя пользователя или пароль учетной записи")

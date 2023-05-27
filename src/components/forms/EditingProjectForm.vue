@@ -1,20 +1,18 @@
 <template>
     <div class="search-Edit-Form">
       <div class="text_input">
-        <!-- :v-model="this.$store.state.taskList.text" -->
-        <!-- :value=getTaskList.text -->
         <input
           class="add-text_input"
           type="text"
           placeholder="Заголовок задачи"
-          v-model.trim="$v.message.$model.text"
+          v-model.trim="message"
           :disabled="!getInputStatusChanges"
-          
+          required
         /><img v-if="getInputStatusChanges" src="@/assets/Vector.png" class="pencil">
       </div>
       <div v-if="getInputStatusChanges" class="search-edit-form_btn">
         <BtnInFormVue @click="isEditTaskItem" id="Cancel" class="BtnSave" label="Отменить" />
-        <BtnInFormVue @click="isEditTaskItem" id="Save" 
+        <BtnInFormVue @click="getFormValues(),isEditTaskItem()" id="Save" 
           class="BtnCancel"
           label="Сохранить"
         />
@@ -31,7 +29,9 @@
   import BtnInFormVue from "./BtnInForm.vue";
   import { required, minLength } from "vuelidate/lib/validators";
   
+
   export default {
+
     name: "EditingTaskForm",
   
     components: {
@@ -39,7 +39,7 @@
     },
     data: ()  => {
         return {
-
+          newText: "",
         }
       },
     props: {
@@ -55,6 +55,7 @@
         minLength: minLength(3),
       }},
     },
+    
     methods: {
     isEditTaskItem: function(){
       if(this.getInputStatusChanges) {
@@ -63,25 +64,14 @@
         this.$store.dispatch("projectModules/changesInputStatus", true);
       }
     },
-    // getFormValues () {
-    //   if(this.message.text != "") {
-        
-    //     const updateTask = {
-    //     id: this.message.id,
-    //     text: this.message.text,
-    //   };
-    //   this.$store.dispatch("taskModules/updateTask", updateTask);
-    //   }
-    //    else if (this.message.text.type === undefined) {
-    //     alert("строка не может быть пустой");
-    //    }
-    //   return this.message;
-    //     },
-    //     resetTaskText: function () {
-    //   this.newText = "";
-    // },
-
-
+    getFormValues: function() {
+      if(this.newText != "") {
+      const updateValue = 
+      {id: this.$route.params.id,
+      text: this.newText};
+      this.$store.dispatch('projectModules/updateProject', updateValue);
+    }
+    }
   },
     computed: {
 
@@ -89,20 +79,14 @@
       return this.$store.state.projectModules.inputStatusChanges
     },
 
-     getTaskList() {
-      return this.$store.state.projectModules.projects;
-    },
-
     message: {
     get () {
-      return this.$store.getters['projectModules/selectProjectById'](this.$route.params.id);
+      return this.$store.getters['projectModules/selectProjectById'](this.$route.params.id).text;
     },
-
-  //   set (value) {
-  //     console.log(value);
-  //     // this.$store.commit('updateMessage', value)
-  //     this.getFormValues();
-  //   }
+    set (value) {
+      if(value) 
+     return this.newText = value;
+    }
    }
   }
   }

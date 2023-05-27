@@ -1,9 +1,7 @@
 <template>
-  <!-- v-bind:class= "[{ 'task-item_active': isCurrentTaskEdit }, 'task-item']" -->
   <div class="task-item">
     <StatusBtnVue @click="handleStatusClick" :isActive="task.isActive" />
     <div :class="task.isActive ? 'task__text_active' : ''">
-      <!-- @click="handleTaskClick" -->
       <div  class="task-item_text">
         <div @click="openTask">{{ task.text }}</div>
       </div>
@@ -36,7 +34,7 @@ export default {
         if (this.task.id) {
           this.$router.push(`/tasklist/${this.task.id}`);
           
-          this.$store.dispatch("taskModules/activateTask", this.task.id);
+          // this.$store.dispatch("taskModules/activateTask", this.task.id);
         } else {
           alert('error');
         }
@@ -48,14 +46,6 @@ export default {
       this.$store.dispatch("taskModules/deleteTask", this.task.id);
     },
  
-  },
-  computed: {
-    // getTaskList() {
-    //   return this.$store.state.taskModules.taskList;
-    // },
-    isCurrentTaskEdit() {
-      return this.$store.state.taskModules.editTaskId === this.task.id;
-    },
   },
 };
 </script>

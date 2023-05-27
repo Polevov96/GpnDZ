@@ -3,13 +3,17 @@
       <div class="task_list_form-information">
         <div label="Подробное описание" />
         <div class = "data_display-form">Подробное описание <span class="pencil" v-if="getInputStatusChanges"  /></div>
-        <div class="task_list_form_information-text"><input v-model="message.descriptionTask" class="task-item_text" :disabled="!getInputStatusChanges" :v-if="selectedItem"  /></div>
+        <div class="task_list_form_information-text"><input v-model="message" class="task-item_text" :disabled="!getInputStatusChanges" :v-if="selectedItem"  /></div>
         <div label="Проект" />
         <div class="data_display-form">Проект <span  v-if="getInputStatusChanges"  class="pencil"></span></div>
-        <div id="project" class="task_list_form_information-text"> <input v-model="getProjects" :disabled="!getInputStatusChanges" id="project" class="task-item_text" /></div>
+        <div id="project" class="task_list_form_information-text"><select @change="chooseProject"  :disabled="!getInputStatusChanges" id="project" class="task-item_text">
+          <option v-if="taskProject" value="none" selected disabled hidden>{{taskProject.text}}</option>
+          <option v-else value="none" selected disabled hidden></option>
+          <option  v-for="project in getProjects"  :key="project.id"  v-bind:value="project.id" :disabled="!getInputStatusChanges" id="project" class="task-item_text" >{{ project.text }}</option>
+        </select></div>
         <div label="Отвественный" />
         <div class="data_display-form">Отвественный <span v-if="getInputStatusChanges"  class="pencil"></span></div>
-        <div id="Responsible" class="task_list_form_information-text"> <input v-model="message" :disabled="!getInputStatusChanges" id="Responsible" class="task-item_text"  /></div>
+        <div id="Responsible" class="task_list_form_information-text"> <input v-model="getOwner.username" :disabled="!getInputStatusChanges" id="Responsible" class="task-item_text"  /></div>
       </div>
       <div class="delete_button">
       <BtnInFormVue @click="handleTaskDelete" id="delete" label="Удалить"/>
@@ -29,8 +33,10 @@
     },
     data: () => {
       return {
-     newProject: "",
-     newResponsible: "",
+      newProject: null,
+      newProjectId: null,
+      newResponsible: "",
+      newDescriptionTask: "",
       }
     },
 
@@ -40,54 +46,54 @@
         default: null,
       },
     },
-
+    
       methods: {
     handleTaskDelete: function () {
       this.$store.dispatch("taskModules/deleteTask", this.selectedItem.id);
       if(this.getInputStatusChanges) {
-        // console.log(this.getInputStatusChanges)
-        // this.$store.dispatch("taskModules/setEdit", false);
         this.$store.dispatch("taskModules/changesInputStatus", false);
       }
       this.$router.push(`/tasklist`);
     },
-
-    resetTaskText: function () {
-      this.newTask = "";
+ 
+    chooseProject: function () {
+       this.newProjectId =  event.target.value;
+       console.log(this.newProjectId);
+       this.$store.dispatch("taskModules/addNewProjectId", this.newProjectId);
     },
-
   },
 
     computed: {
-    getTaskList() {
-      return this.$store.getters['taskModules/selectTaskById'](this.$route.params.id);
-    },
- 
-    isEditTask() {
-      return this.$store.state.taskModules.isEdit
-    },
     getInputStatusChanges() {
       return this.$store.state.taskModules.inputStatusChanges
     },
     message: {
     get () {
-     return this.$store.getters['taskModules/selectTaskById'](this.$route.params.id);
+      // console.log(this.$store.getters['taskModules/selectTaskById'](this.$route.params.id).descriptionTask);
+     return this.$store.getters['taskModules/selectTaskById'](this.$route.params.id).descriptionTask;
     },
+    set (value) {
+      this.newDescriptionTask = value;
+      this.$store.dispatch("taskModules/addDescription", this.newDescriptionTask);
+    }
 
   },
-  getOwner:  {
-    get () {
-      return this.$store.getters['projectModules/selectTaskById'](this.$route.params.id);
-    }
+  getOwner()  {
+      return this.$store.state.userModules.user;
+    
   },
-  getProjects: {
-    get () {
-      // return this.$store.getters['projectModules/selectTaskById'](this.$route.params.id);
-      // console.log(this.$store.state.taskModules.taskProjectId);
-      return this.$store.state.taskModules.taskProjectId;
-    }
+  taskProject() {
+       console.log(this.$store.getters['projectModules/selectProjectById'](this.getTaskProject))
+   return this.$store.getters['projectModules/selectProjectById'](this.getTaskProject);
+},
+  getProjects() { 
+      return this.$store.state.projectModules.projects;
+  },
+  getTaskProject() { 
+    console.log(this.$store.getters['taskModules/selectTaskById'](this.$route.params.id).projectId)
+    return this.$store.getters['taskModules/selectTaskById'](this.$route.params.id).projectId;
+  },
   }
-}
 };
   </script>
   
@@ -275,5 +281,17 @@
     box-shadow: none; 
     background-image: url('@/assets/Vector (1).png');
   }
+
+  select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+select:disabled {
+  color: #1D2939;
+  opacity: 1;
+    border-color: rgba(118, 118, 118, 0.3);
+}
+
   </style>
   

@@ -5,7 +5,14 @@ import { apiConstants } from "@/utils/constants";
 const { USER_API_URL } = apiConstants;
 
 export const getUser = async () => {
-    const res = await httpClient.get(USER_API_URL);
+    let res;
+    console.log("GetUser");
+    try {
+        res = await httpClient.get(USER_API_URL);
+    } catch (err){
+        console.log(err);
+    }
+
     if(!res) {
         const errorMessage = JSON.stringify({
             text: res.statusText,
@@ -13,5 +20,6 @@ export const getUser = async () => {
         });
         return new Error(errorMessage);
     }
+   localStorage.setItem('usersList', JSON.stringify(res.data));
         return res.data;
-}
+};

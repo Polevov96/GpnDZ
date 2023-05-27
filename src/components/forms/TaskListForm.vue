@@ -18,8 +18,6 @@
 import TaskItemVue from "../ui/TaskItem.vue";
 import BtnInFormVue from "./BtnInForm.vue";
 
-// NEW_VARIANT: добавил константы выполнения задач
-// eslint-disable-next-line
 import { FiltersConstants } from "@/utils/constants";
 
 export default {
@@ -31,6 +29,7 @@ export default {
 
   methods: {
     setFilter(value) {
+      console.log(value);
       this.$store.dispatch("taskModules/setTaskFilter", value);
     },
   },

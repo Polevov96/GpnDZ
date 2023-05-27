@@ -3,13 +3,14 @@ import { FiltersConstants } from "../utils/constants";
 export const projectModules = {
     namespaced: true,
     state: {
-        projects: JSON.parse(localStorage.getItem('projects')) || [{id: '', text: "", isActive: false, }],
+        projects: JSON.parse(localStorage.getItem('projects')) || [],
+        //{id: '', text: "", isActive: false, }
         inputStatusChanges: false,
         filter: FiltersConstants.ALL,
       },
+      
     getters: {
  filteredProjects: (state) => {
-        // NEW_VARIANT:  так стало
         if (state.filter === FiltersConstants.IN_PROGRESS) {
           return state.projects.filter((item) => !item.isActive);
         }
@@ -21,10 +22,11 @@ export const projectModules = {
         return state.projects;
       },  
       selectProjectById: (state) => id => {
-
           return state.projects.find((item) => item.id === parseInt(id));
-
       },
+    //   selectProjectByText: (state) => id => {
+        
+    // },
     },
       mutations: {
         ADD_PROJECT: (state, payload) => {
@@ -49,8 +51,20 @@ export const projectModules = {
         },
         CHANGES_INPUT_STATUS: (state, payload) => {
           state.inputStatusChanges = payload;
-      
         },
+        UPDATE_PROJECT: (state, payload) => {
+          const {id, ...props2} = payload;
+          state.projects = state.projects.map((project) => {
+            if(project.id == id) {
+              project = {
+                ...project,
+                ...props2,
+              };
+            }
+            return project;
+          });
+          localStorage.setItem('projects', JSON.stringify(state.projects));
+        }
       },
       actions: {
 
@@ -72,6 +86,9 @@ export const projectModules = {
       },
       changesInputStatus: function (context, payload) {
         context.commit("CHANGES_INPUT_STATUS", payload);
+      },
+      updateProject: function (context, payload) {
+        context.commit("UPDATE_PROJECT", payload);
       },
     } 
 };
